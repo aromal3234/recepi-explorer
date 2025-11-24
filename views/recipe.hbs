@@ -1,0 +1,110 @@
+{{!-- Recipe Details Page --}}
+<a href="/" class="back-link">&larr; Back to Home</a>
+<div class="recipe-details-container">
+  <div class="recipe-details-card">
+    {{#if meal.strMealThumb}}
+      <img src="{{meal.strMealThumb}}" alt="{{meal.strMeal}}" class="recipe-details-image" />
+    {{/if}}
+    <div class="recipe-details-info">
+      <h1 class="recipe-details-title">{{meal.strMeal}}
+        {{#if isFavorite}}
+          <form action="/unfavorite" method="post" style="display:inline; margin-left:12px;">
+            <input type="hidden" name="id" value="{{meal.idMeal}}" />
+            <button type="submit" class="fav-btn" title="Remove from favorites" style="background:none;border:none;cursor:pointer;font-size:1.1em;vertical-align:middle;">
+              <span style="color:#ffb300;">&#9734; Unfavorite</span>
+            </button>
+          </form>
+        {{else}}
+          <form action="/favorite" method="post" style="display:inline; margin-left:12px;">
+            <input type="hidden" name="id" value="{{meal.idMeal}}" />
+            <input type="hidden" name="name" value="{{meal.strMeal}}" />
+            <input type="hidden" name="image" value="{{meal.strMealThumb}}" />
+            <button type="submit" class="fav-btn" title="Add to favorites" style="background:none;border:none;cursor:pointer;font-size:1.1em;vertical-align:middle;">
+              <span style="color:#ffb300;">&#11088; Favorite</span>
+            </button>
+          </form>
+        {{/if}}
+      </h1>
+      {{#if meal.strCategory}}
+        <p class="recipe-details-category"><b>Category:</b> {{meal.strCategory}}</p>
+      {{/if}}
+      {{#if meal.strArea}}
+        <p class="recipe-details-area"><b>Area:</b> {{meal.strArea}}</p>
+      {{/if}}
+      {{#if meal.strInstructions}}
+        <h3>Instructions:</h3>
+        <p class="recipe-details-instructions">{{meal.strInstructions}}</p>
+      {{/if}}
+      <h3>Ingredients:</h3>
+      <ul>
+        {{#if meal.strIngredient1}}<li>{{meal.strMeasure1}} {{meal.strIngredient1}}</li>{{/if}}
+        {{#if meal.strIngredient2}}<li>{{meal.strMeasure2}} {{meal.strIngredient2}}</li>{{/if}}
+        {{#if meal.strIngredient3}}<li>{{meal.strMeasure3}} {{meal.strIngredient3}}</li>{{/if}}
+        {{#if meal.strIngredient4}}<li>{{meal.strMeasure4}} {{meal.strIngredient4}}</li>{{/if}}
+        {{#if meal.strIngredient5}}<li>{{meal.strMeasure5}} {{meal.strIngredient5}}</li>{{/if}}
+        {{#if meal.strIngredient6}}<li>{{meal.strMeasure6}} {{meal.strIngredient6}}</li>{{/if}}
+        {{#if meal.strIngredient7}}<li>{{meal.strMeasure7}} {{meal.strIngredient7}}</li>{{/if}}
+        {{#if meal.strIngredient8}}<li>{{meal.strMeasure8}} {{meal.strIngredient8}}</li>{{/if}}
+        {{#if meal.strIngredient9}}<li>{{meal.strMeasure9}} {{meal.strIngredient9}}</li>{{/if}}
+        {{#if meal.strIngredient10}}<li>{{meal.strMeasure10}} {{meal.strIngredient10}}</li>{{/if}}
+      </ul>
+    </div>
+  </div>
+</div>
+
+<style>
+.recipe-details-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 24px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+}
+.recipe-details-card {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+.recipe-details-image {
+  width: 320px;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.07);
+}
+.recipe-details-info {
+  flex: 1;
+}
+.recipe-details-title {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 2.2rem;
+  color: #2d2d2d;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.recipe-details-category, .recipe-details-area {
+  color: #666;
+  margin-bottom: 8px;
+}
+.recipe-details-instructions {
+  font-size: 1.1rem;
+  color: #444;
+  margin-bottom: 18px;
+}
+.back-link {
+  display: inline-block;
+  margin-bottom: 18px;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+.back-link:hover {
+  text-decoration: underline;
+}
+.fav-btn:hover span {
+  color: #ff7e5f;
+}
+</style>

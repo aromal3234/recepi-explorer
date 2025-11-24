@@ -1,0 +1,103 @@
+<header class="home-header">
+  <h1>{{title}}</h1>
+  <p class="lead">Find recipes, save favorites, and explore new dishes.</p>
+
+  <form class="search-form" action="/" method="get">
+    <input type="search" name="q" id="q" placeholder="Search recipes or ingredients" autocomplete="off" value="{{q}}" />
+    <button type="submit">Search</button>
+  </form>
+  
+  <div class="search-suggestions-wrapper"></div>
+</header>
+
+{{#if q}}
+  <section class="search-results">
+    <a href="/" class="back-home-icon" title="Back to Home" style="display:inline-block;margin-bottom:12px;font-size:1.2em;text-decoration:none;">
+      &#8592; Home
+    </a>
+    <h2>Results for "{{q}}" {{#if results}}({{results.length}}){{/if}}</h2>
+
+    {{#if results}}
+      <div class="card-grid three-cols">
+        {{#each results}}
+          <div class="recipe-card">
+            <a href="{{#if this.idMeal}}/recipe/{{this.idMeal}}{{else}}/recipe/{{this.id}}{{/if}}" class="card-image-link">
+              {{#if this.strMealThumb}}
+                <img src="{{this.strMealThumb}}" alt="{{#if this.strMeal}}{{this.strMeal}}{{else}}{{this.title}}{{/if}}" class="card-image" />
+              {{else if this.image}}
+                <img src="{{this.image}}" alt="{{#if this.title}}{{this.title}}{{else}}{{this.name}}{{/if}}" class="card-image" />
+              {{/if}}
+            </a>
+            <div class="card-body">
+              <a href="{{#if this.idMeal}}/recipe/{{this.idMeal}}{{else}}/recipe/{{this.id}}{{/if}}" class="card-title">
+                {{#if this.strMeal}}{{this.strMeal}}{{else}}{{#if this.title}}{{this.title}}{{else}}{{this.name}}{{/if}}{{/if}}
+              </a>
+            </div>
+            <div class="card-actions">
+              <a class="btn-fav" href="/favorites/add/{{#if this.idMeal}}{{this.idMeal}}{{else}}{{this.id}}{{/if}}">Add to favorites</a>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    {{else}}
+      <p>No results found for "{{q}}".</p>
+    {{/if}}
+  </section>
+{{else}}
+  <section class="explainer">
+
+  </section>
+  <section class="default-foods">
+    <h2>Popular Foods</h2>
+    <div class="card-grid three-cols">
+      <div class="recipe-card">
+        <a href="/recipe/52772" class="card-image-link">
+          <img src="https://www.themealdb.com/images/media/meals/ctg8jd1585563097.jpg" alt="Teriyaki Chicken Casserole" class="card-image" />
+        </a>
+        <div class="card-body">
+          <a href="/recipe/52772" class="card-title">Teriyaki Chicken Casserole</a>
+        </div>
+      </div>
+      <div class="recipe-card">
+        <a href="/recipe/52804" class="card-image-link">
+          <img src="https://www.themealdb.com/images/media/meals/wvpsxx1468256321.jpg" alt="Beef Wellington" class="card-image" />
+        </a>
+        <div class="card-body">
+          <a href="/recipe/52804" class="card-title">Beef Wellington</a>
+        </div>
+      </div>
+      <div class="recipe-card">
+        <a href="/recipe/52844" class="card-image-link">
+          <img src="https://www.themealdb.com/images/media/meals/1529444830.jpg" alt="Lasagne" class="card-image" />
+        </a>
+        <div class="card-body">
+          <a href="/recipe/52844" class="card-title">Lasagne</a>
+        </div>
+      </div>
+      <div class="recipe-card">
+        <a href="/recipe/52959" class="card-image-link">
+          <img src="https://www.themealdb.com/images/media/meals/58oia61564916529.jpg" alt="Tuna Nicoise" class="card-image" />
+        </a>
+        <div class="card-body">
+          <a href="/recipe/52959" class="card-title">Tuna Nicoise</a>
+        </div>
+      </div>
+      <div class="recipe-card">
+        <a href="/recipe/52819" class="card-image-link">
+          <img src="https://www.themealdb.com/images/media/meals/txsupu1511815755.jpg" alt="Pad Thai" class="card-image" />
+        </a>
+        <div class="card-body">
+          <a href="/recipe/52819" class="card-title">Pad Thai</a>
+        </div>
+      </div>
+      <div class="recipe-card">
+        <a href="/recipe/52977" class="card-image-link">
+          <img src="https://www.themealdb.com/images/media/meals/58oia61564916529.jpg" alt="Chicken Fajita Mac and Cheese" class="card-image" />
+        </a>
+        <div class="card-body">
+          <a href="/recipe/52977" class="card-title">Chicken Fajita Mac and Cheese</a>
+        </div>
+      </div>
+    </div>
+  </section>
+{{/if}}

@@ -1,0 +1,239 @@
+/* Autocomplete suggestions */
+.search-suggestions {
+	position: absolute;
+	background: white;
+	border: 1px solid #ddd;
+	width: 100%;
+	max-width: 480px;
+	box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+	z-index: 1000;
+	display: none;
+}
+.search-suggestions .suggestion-item {
+	padding: 8px 10px;
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	cursor: pointer;
+}
+.search-suggestions .suggestion-item:hover {
+	background: #f6f6f6;
+}
+.search-suggestions img { width: 48px; height: 48px; object-fit: cover; border-radius: 4px; }
+.search-suggestions .s-title { font-size: 14px; }
+
+/* ensure suggestion container positions near search input */
+.search-form { position: relative; }
+.search-suggestions { top: 100%; left: 0; }
+
+/* Navbar styles */
+.navbar { background: linear-gradient(90deg, #ff7e5f, #feb47b); color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+.navbar .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; padding: 10px 16px; gap: 16px; }
+.brand-link { display: flex; align-items: center; gap: 10px; color: inherit; text-decoration: none; }
+.brand-logo { font-size: 22px; display: inline-block; }
+.brand-title { font-weight: 700; font-size: 18px; letter-spacing: 0.2px; }
+
+.nav-toggle { display: none; background: transparent; border: none; cursor: pointer; }
+.nav-toggle .hamburger { width: 22px; height: 2px; background: rgba(255,255,255,0.9); display: block; position: relative; }
+.nav-toggle .hamburger::before, .nav-toggle .hamburger::after { content: ''; position: absolute; left: 0; right: 0; height: 2px; background: rgba(255,255,255,0.9); }
+.nav-toggle .hamburger::before { top: -7px; }
+.nav-toggle .hamburger::after { top: 7px; }
+
+.nav-menu { margin-left: auto; display: flex; align-items: center; gap: 20px; }
+.nav-links { list-style: none; margin: 0; padding: 0; display: flex; gap: 12px; }
+.nav-links a { color: rgba(255,255,255,0.95); text-decoration: none; padding: 8px 10px; border-radius: 8px; transition: background .15s ease; }
+.nav-links a:hover { background: rgba(255,255,255,0.12); }
+.nav-fav { position: relative; display: inline-flex; align-items: center; gap: 8px; }
+.fav-badge { background: rgba(0,0,0,0.15); color: #fff; padding: 2px 6px; border-radius: 999px; font-size: 12px; }
+
+.nav-right { display: flex; align-items: center; gap: 14px; }
+.auth-links .link { color: rgba(255,255,255,0.95); margin-right: 8px; }
+.btn.signup { background: rgba(255,255,255,0.12); color: #fff; padding: 6px 10px; border-radius: 8px; text-decoration: none; }
+
+.user-area { display: flex; align-items: center; gap: 10px; }
+.user-avatar { width:40px; height:40px; border-radius:50%; overflow:hidden; background: rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:center; }
+.user-avatar img { width:100%; height:100%; object-fit:cover; }
+.avatar-initial { font-weight:700; color:#fff; }
+.user-info { display:flex; flex-direction:column; font-size:13px; }
+.user-name { font-weight:600; }
+.btn-logout { color: rgba(255,255,255,0.95); font-size:13px; text-decoration:none; }
+
+/* 3-column card grid for food cards on search results page */
+.card-grid.three-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px 20px;
+  margin: 32px 0 0 0;
+}
+
+.recipe-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow .18s;
+}
+.recipe-card:hover {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.13);
+}
+.card-image-link {
+  display: block;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+}
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.card-body {
+  padding: 16px 16px 8px 16px;
+  flex: 1;
+}
+.card-title {
+  font-size: 1.18rem;
+  font-weight: 600;
+  color: #2d2d2d;
+  text-decoration: none;
+  margin-bottom: 8px;
+  display: block;
+}
+.card-desc {
+  font-size: 0.98rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+.card-actions {
+  padding: 0 16px 16px 16px;
+}
+.btn-fav {
+  background: #ffecd2;
+  color: #d35400;
+  border-radius: 8px;
+  padding: 7px 14px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.98rem;
+  transition: background .15s;
+}
+.btn-fav:hover {
+  background: #ffd6a0;
+}
+
+@media (max-width: 900px) {
+  .card-grid.three-cols {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .card-grid.three-cols {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Responsive */
+@media (max-width: 760px) {
+	.nav-toggle { display: block; }
+	.nav-menu { position: absolute; right: 16px; top: 64px; background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)); backdrop-filter: blur(6px); border-radius: 10px; padding: 12px; display: none; flex-direction: column; min-width: 220px; }
+	.nav-menu.open { display: flex; }
+	.nav-links { flex-direction: column; }
+	.nav-right { flex-direction: column; align-items: flex-start; }
+}
+
+/* Auth forms */
+.auth-page { display:flex; justify-content:center; padding:32px 16px; }
+.auth-card { width:100%; max-width:420px; background: #ffffff; border-radius: 12px; padding: 22px; box-shadow: 0 6px 30px rgba(10,10,20,0.08); }
+.auth-header h2 { margin:0 0 6px; font-size:20px; color:#222; }
+.auth-header .muted { color:#666; font-size:13px; margin:0 0 14px; }
+.auth-form .form-field { margin-bottom:12px; }
+.auth-form label { display:block; font-size:13px; color:#444; margin-bottom:6px; }
+.auth-form input { width:100%; padding:10px 12px; border:1px solid #e6e6e6; border-radius:8px; font-size:14px; outline:none; transition:box-shadow .12s, border-color .12s; }
+.auth-form input:focus { box-shadow:0 4px 12px rgba(80,120,200,0.08); border-color:#7aa7ff; }
+.password-row { display:flex; gap:8px; align-items:center; }
+.password-row .show-pass { background:transparent; border:1px solid #e6e6e6; padding:8px 10px; border-radius:8px; cursor:pointer; font-size:13px; }
+.form-actions { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:8px; }
+.btn { border:0; padding:10px 14px; border-radius:8px; cursor:pointer; }
+.btn.primary { background: linear-gradient(90deg,#ff7e5f,#feb47b); color:#fff; font-weight:600; }
+.link.forgot { color:#666; font-size:13px; text-decoration:none; }
+.auth-footer { margin-top:14px; text-align:center; font-size:13px; color:#555; }
+
+.search-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 32px auto 0 auto;
+  max-width: 600px;
+  width: 100%;
+}
+.search-form input[type="search"] {
+  flex: 1;
+  padding: 18px 20px;
+  font-size: 1.25rem;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 10px 0 0 10px;
+  outline: none;
+  min-width: 0;
+  background: #fafbfc;
+  transition: border-color .18s;
+}
+.search-form input[type="search"]:focus {
+  border-color: #ff7e5f;
+}
+.search-form button {
+  padding: 18px 28px;
+  font-size: 1.18rem;
+  border: none;
+  background: linear-gradient(90deg,#ff7e5f,#feb47b);
+  color: #fff;
+  border-radius: 0 10px 10px 0;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .18s;
+}
+.search-form button:hover {
+  background: linear-gradient(90deg,#feb47b,#ff7e5f);
+}
+
+@media (max-width: 600px) {
+  .search-form {
+    flex-direction: column;
+    max-width: 100%;
+  }
+  .search-form input[type="search"] {
+    border-radius: 10px 10px 0 0;
+    font-size: 1.05rem;
+    padding: 14px 12px;
+  }
+  .search-form button {
+    border-radius: 0 0 10px 10px;
+    width: 100%;
+    font-size: 1.05rem;
+    padding: 14px 0;
+  }
+}
+
+/* Centering styles for headings and lead text */
+.home-header h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-top: 32px;
+  margin-bottom: 8px;
+}
+.home-header .lead {
+  text-align: center;
+  font-size: 1.25rem;
+  color: #666;
+  margin-bottom: 18px;
+}
+.search-results h2,
+.default-foods h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 24px 0 18px 0;
+  color: #333;
+}
+

@@ -1,0 +1,77 @@
+<!-- views/food.hbs -->
+{{! Food Details Page }}
+{{> layout}}
+
+<div class="food-details-container">
+  <a href="/" class="back-link">&larr; Back to Home</a>
+  <div class="food-details-card">
+    <img src="{{meal.image}}" alt="{{meal.name}}" class="food-details-image" />
+    <div class="food-details-info">
+      <h1 class="food-details-title">{{meal.name}}</h1>
+      <p class="food-details-description">{{meal.description}}</p>
+      {{#if meal.ingredients}}
+        <h3>Ingredients:</h3>
+        <ul>
+          {{#each meal.ingredients}}
+            <li>{{this}}</li>
+          {{/each}}
+        </ul>
+      {{/if}}
+      {{#if meal.instructions}}
+        <h3>Instructions:</h3>
+        <ol>
+          {{#each meal.instructions}}
+            <li>{{this}}</li>
+          {{/each}}
+        </ol>
+      {{/if}}
+    </div>
+  </div>
+</div>
+
+<style>
+.food-details-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 24px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+}
+.food-details-card {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+.food-details-image {
+  width: 320px;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.07);
+}
+.food-details-info {
+  flex: 1;
+}
+.food-details-title {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 2.2rem;
+  color: #2d2d2d;
+}
+.food-details-description {
+  font-size: 1.1rem;
+  color: #444;
+  margin-bottom: 18px;
+}
+.back-link {
+  display: inline-block;
+  margin-bottom: 18px;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+.back-link:hover {
+  text-decoration: underline;
+}
+</style>

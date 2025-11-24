@@ -1,0 +1,37 @@
+<nav class="navbar">
+  <div class="nav-inner">
+    <div class="brand">
+      <a href="/" class="brand-link">
+        <span class="brand-logo">🍲</span>
+        <span class="brand-title">Recipe Explorer</span>
+      </a>
+    </div>
+
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      <span class="hamburger"></span>
+    </button>
+
+    <div class="nav-menu">
+      <ul class="nav-links">
+        <li><a href="/favorites" class="nav-fav">Favorites <span class="fav-badge">{{favoriteCount}}</span></a></li>
+      </ul>
+
+      <div class="nav-right">
+        {{#if user}}
+          <div class="user-area">
+            <div class="user-avatar">{{#if user.avatar}}<img src="{{user.avatar}}" alt="{{user.name}}" />{{else}}<span class="avatar-initial">{{user.name.[0]}}</span>{{/if}}</div>
+            <div class="user-info">
+              <div class="user-name">{{user.name}}</div>
+              <a class="btn-logout" href="/logout">Logout</a>
+            </div>
+          </div>
+        {{else}}
+          <div class="auth-links">
+            <a class="link login" href="/login">Login</a>
+            <a class="btn signup" href="/signup">Sign up</a>
+          </div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</nav>
