@@ -10,13 +10,13 @@ const Favorite = require("../models/Favorite");
 
 const router = express.Router();
 
-// ✅ MongoDB Connection
+//  MongoDB Connection
 mongoose
   .connect("mongodb://127.0.0.1:27017/recipesDB")
-  .then(() => console.log("✅ MongoDB Connected"))
+  .then(() => console.log(" MongoDB Connected"))
   .catch((err) => console.log(err));
 
-// ✅ MIDDLEWARE: Check Login
+// MIDDLEWARE: Check Login
 function requireLogin(req, res, next) {
   if (!req.session.userId) return res.redirect("/login");
   next();
@@ -39,12 +39,12 @@ router.use(async (req, res, next) => {
   next();
 });
 
-// ✅ SIGNUP PAGE
+//  SIGNUP PAGE
 router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-// ✅ SIGNUP POST
+//  SIGNUP POST
 router.post("/signup", async (req, res) => {
   const { username, email, password } = req.body;
   const normalizedEmail = (email || "").trim().toLowerCase();
@@ -54,12 +54,12 @@ router.post("/signup", async (req, res) => {
   res.redirect("/");
 });
 
-// ✅ LOGIN PAGE
+// LOGIN PAGE
 router.get("/login", (req, res) => {
   res.render("login");
 });
 
-// ✅ LOGIN POST
+//  LOGIN POST
 router.post("/login", async (req, res) => {
   const email = (req.body.email || "").trim().toLowerCase();
   const password = req.body.password;
@@ -75,18 +75,18 @@ router.post("/login", async (req, res) => {
   res.redirect("/");
 });
 
-// ✅ LOGOUT
+//  LOGOUT
 router.get("/logout", (req, res) => {
   req.session.destroy();
   res.redirect("/login");
 });
 
-// ✅ HOME PAGE (Search + Combined Results)
+// HOME PAGE (Search + Combined Results)
 router.get("/", async (req, res) => {
   const q = req.query.q || "";
 
   try {
-    // 1️⃣ Fetch from API
+    //  Fetch from API
     const apiResponse = await axios.get(
       `https://www.themealdb.com/api/json/v1/1/search.php?s=${encodeURIComponent(q)}`
     );
@@ -99,7 +99,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// ✅ SEARCH PAGE (Logged In)
+//  SEARCH PAGE (Logged In)
 router.post("/search", requireLogin, async (req, res) => {
   const query = req.body.query;
   const response = await axios.get(
@@ -108,7 +108,7 @@ router.post("/search", requireLogin, async (req, res) => {
   res.render("results", { meals: response.data.meals });
 });
 
-// ✅ RECIPE DETAILS PAGE (with favorite status)
+//  RECIPE DETAILS PAGE (with favorite status)
 router.get("/recipe/:id", async (req, res) => {
   const id = req.params.id;
   let isFavorite = false;
@@ -131,7 +131,7 @@ router.get("/recipe/:id", async (req, res) => {
   }
 });
 
-// ✅ ADD FAVORITE
+// ADD FAVORITE
 router.post("/favorite", requireLogin, async (req, res) => {
   const { id, name, image } = req.body;
   const userId = req.session.userId;
@@ -143,7 +143,7 @@ router.post("/favorite", requireLogin, async (req, res) => {
   res.redirect("/favorites");
 });
 
-// ✅ REMOVE FAVORITE
+// REMOVE FAVORITE
 router.post("/unfavorite", requireLogin, async (req, res) => {
   const { id } = req.body;
   const userId = req.session.userId;
@@ -151,13 +151,13 @@ router.post("/unfavorite", requireLogin, async (req, res) => {
   res.redirect("back");
 });
 
-// ✅ VIEW FAVORITES
+// VIEW FAVORITES
 router.get("/favorites", requireLogin, async (req, res) => {
   const favorites = await Favorite.find({ userId: req.session.userId });
   res.render("favorites", { favorites });
 });
 
-// ✅ SUGGESTIONS API
+// SUGGESTIONS API
 router.get("/api/suggest", async (req, res) => {
   const q = (req.query.q || "").trim();
   if (!q) return res.json({ suggestions: [] });
